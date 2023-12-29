@@ -122,7 +122,7 @@ ecosystem.config.cjs
 ```
 module.exports = {
   apps : [{
-		name   : "slog",
+    name   : "slog",
     script: './dist/main.js',
     watch: './dist',
     instances: "2",
