@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+  token Token[]
+  articles Article[]
+  comments Comment[]
+  likes Like[]
+}
+
+model Token {
+	id Int @id @default(autoincrement())
+  userId Int
+  refreshToken String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Article {
+  id Int @id @default(autoincrement())
+  content String
+  userId Int
+  likeCount Int @default(0)
+  likes Like[]
+  commentCount  Int @default(0)
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  id Int @id @default(autoincrement())
+  userId  Int
+  articleId Int
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String
+  createdAt DateTime  @default(now())
+  userId  Int
+  articleId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+}
