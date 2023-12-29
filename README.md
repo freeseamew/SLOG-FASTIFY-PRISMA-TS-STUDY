@@ -174,3 +174,7 @@ pm2 scale 앱이름 개수
 ```
 sudo snap install postman
 ```
+
+Frontend Project Link
+
+> https://github.com/freeseamew/SLOG-FRONTEND-SVELTE
