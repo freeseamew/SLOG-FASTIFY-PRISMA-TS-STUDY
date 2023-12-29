@@ -38,7 +38,7 @@ const readCommentSchema = {
 
 const deleteCommentSchema = {
   headers,
-	body: commentDeleteBodySchema,
+  body: commentDeleteBodySchema,
   response: {
     200: Type.Object({
       commentId: Type.Number(),
@@ -47,7 +47,7 @@ const deleteCommentSchema = {
 }
 
 export {
-	commentSchema,
+  commentSchema,
   commentDeleteBodySchema,
   createCommentSchema,
   readCommentSchema,

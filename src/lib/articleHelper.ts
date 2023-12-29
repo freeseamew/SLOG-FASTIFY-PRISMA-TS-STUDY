@@ -2,7 +2,7 @@ import db from './db'
 import { TArticle } from '../schema/types'
 
 const verifyArticleUser = async ( articleId:number, userId: number) => {
-  
+
   let result = false
 
   try {
@@ -27,7 +27,7 @@ const verifyArticleUser = async ( articleId:number, userId: number) => {
 }
 
 const likeCompareArticles = async (articles:TArticle[], userId: number) => {
-  
+
   type TArticlesIds = {
     articleId: number
   }

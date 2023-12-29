@@ -7,13 +7,13 @@ import articleService from '../../services/articleService'
 import { verifySignIn } from '../../lib/authHelper'
 
 const articleRoute = async (fastify: FastifyInstance) => {
-	fastify.route({
+  fastify.route({
     method: 'POST',
     schema: createArticleSchema,
     url: '/',
-		preHandler: [verifySignIn],
+    preHandler: [verifySignIn],
     handler: async (req:FastifyRequest<{Headers: TCommonHeaders, Body: TCommonBody}>, rep: FastifyReply) => {
-			const { content } = req.body
+      const { content } = req.body
       const userId = req.user!.id
       const email = req.user!.email
 
@@ -33,7 +33,7 @@ const articleRoute = async (fastify: FastifyInstance) => {
     schema: updateArticleSchema,
     preHandler: [verifySignIn],
     handler: async (req: FastifyRequest<{Headers: TCommonHeaders,Body: TCommonBody }>, rep: FastifyReply) => {
-			const { articleId, content } = req.body
+      const { articleId, content } = req.body
       const userId = req.user!.id
       const email = req.user!.email
 
@@ -47,13 +47,13 @@ const articleRoute = async (fastify: FastifyInstance) => {
     }
   })
 
-	fastify.route({
+  fastify.route({
     method: 'DELETE',
     url: '/:articleId',
     schema: deleteArticleSchema,
     preHandler: [verifySignIn],
     handler: async (req: FastifyRequest<{Headers: TCommonHeaders, Params: TCommonParam}>, rep: FastifyReply) => {
-			const { articleId } = req.params
+      const { articleId } = req.params
       const userId = req.user!.id
 
       try {
@@ -65,13 +65,13 @@ const articleRoute = async (fastify: FastifyInstance) => {
       }
     }
   })
-  
-	fastify.route({
+
+  fastify.route({
     method: 'GET',
     url: '/:articleId',
     schema: readArticleOneSchema,
     handler: async (req: FastifyRequest<{Params: TCommonParam}>, rep: FastifyReply) => {
-			const { articleId } = req.params
+      const { articleId } = req.params
 
       try {
         const result = await articleService.readArticleOne(Number(articleId))
@@ -88,7 +88,7 @@ const articleRoute = async (fastify: FastifyInstance) => {
     url:'/',
     schema: readArticlesSchema,
     handler: async (req:FastifyRequest<{Headers: TCommonHeaders, Querystring: TCommonQuery}>, rep: FastifyReply) => {
-			const { pageNumber = 0, mode = CATEGORY_TYPE.ALL } = req.query
+      const { pageNumber = 0, mode = CATEGORY_TYPE.ALL } = req.query
       const userId = req.user?.id
 
       try {

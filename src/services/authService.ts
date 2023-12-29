@@ -3,22 +3,22 @@ import { generateHash, duplicateVerifyUser, verifyPassword, generateAccessToken,
 import { ERROR_MESSAGE } from '../lib/constants'
 
 function authService() {
-	const register = async (email: string, pwd: string) => {
+  const register = async (email: string, pwd: string) => {
 
     try {
       await duplicateVerifyUser(email)
-  
+
       const hashPwd = generateHash(pwd)
-  
+
       const values = {
         email: email,
         password: hashPwd,
       }
-  
+
       const returnValue = await db.user.create({
         data: values
       })
-  
+
       return returnValue
     }
     catch(error) {
@@ -26,10 +26,10 @@ function authService() {
     }
   }
 
-	const loginWithPassword = async (email: string, pwd: string) => {
-  
+  const loginWithPassword = async (email: string, pwd: string) => {
+
     try {
-  
+
       const authenticationUser = await db.user.findUnique({
         where: {
           email: email,
@@ -71,8 +71,8 @@ function authService() {
     }
   }
 
-	const logout = async (refresh_token: string) => {
-  
+  const logout = async (refresh_token: string) => {
+
     try {
       const returnValue = await db.token.deleteMany({
         where: {
@@ -87,26 +87,26 @@ function authService() {
     }
   }
 
-	const refresh = async ( refresh_token: string ) => {
-  
+  const refresh = async ( refresh_token: string ) => {
+
     try {
       if(!refresh_token) throw ERROR_MESSAGE.unauthorized
       
       const authenticationUser = await verifyRefreshToken(refresh_token)
-  
+
       const userInfo = {
         id: authenticationUser.id,
         email: authenticationUser.email
       }
-  
+
       const access_token = generateAccessToken(userInfo)
-  
+
       const returnValues ={
         id: authenticationUser.id,
         email:authenticationUser.email,
         Authorization: access_token,
       }
-  
+
       return returnValues
     }
     catch(error) {
@@ -114,7 +114,7 @@ function authService() {
     }
   }  
 
-	return {
+  return {
     register,
     loginWithPassword,
     logout,

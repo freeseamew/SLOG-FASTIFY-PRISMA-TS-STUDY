@@ -41,7 +41,7 @@ fastify.register(routes)
 
 const start = async () => {
   try {
-		await checkStartupUser()
+    await checkStartupUser()
     await checkStartupArticle()    
     await fastify.listen({port: 8083}, () => {if (process.send) process.send("ready")})
     console.log(`Server Start!!`)

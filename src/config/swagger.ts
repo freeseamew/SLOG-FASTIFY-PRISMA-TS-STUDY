@@ -7,7 +7,7 @@ const swaggerConfig = {
       description: 'Slog에 사용되는 REST API 명세서 입니다. ',
       version: '1.0.0',
     },
-		host: 'localhost:8083',
+    host: 'localhost:8083',
     basePth:'/',
   },  
 }

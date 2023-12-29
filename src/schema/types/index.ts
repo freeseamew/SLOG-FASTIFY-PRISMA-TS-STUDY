@@ -17,10 +17,10 @@ export {
 	TAuthBody,
 	TCommonHeaders,
 	TArticle,
-  TCommonBody,
+	TCommonBody,
 	TCommonParam,
 	TCommonQuery,
 	TCommonPagenation,	
 	TComment,
-  TCommentDeleteBody,
+	TCommentDeleteBody,
 }

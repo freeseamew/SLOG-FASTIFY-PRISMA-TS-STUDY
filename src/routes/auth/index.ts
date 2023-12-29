@@ -6,22 +6,22 @@ import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../lib/constants'
 import { handleError } from '../../lib/errorHelper'
 
 const authRoute = async (fastify: FastifyInstance) => {
-	fastify.post('/register', {schema: registerSchema}, async (req: FastifyRequest<{Body: TAuthBody}>, rep: FastifyReply) => {
-		const { email, pwd } = req.body
+  fastify.post('/register', {schema: registerSchema}, async (req: FastifyRequest<{Body: TAuthBody}>, rep: FastifyReply) => {
+    const { email, pwd } = req.body
 
-		try {
-			await authService.register(email, pwd)
+    try {
+      await authService.register(email, pwd)
       rep.status(SUCCESS_MESSAGE.registerOk.status).send(SUCCESS_MESSAGE.registerOk)
     }
     catch(error) {
       handleError(rep, ERROR_MESSAGE.badRequest, error)
     }
-	})
+  })
 
-	fastify.post('/login', {schema: loginSchema}, async (req:FastifyRequest<{Body: TAuthBody}>, rep: FastifyReply) => {
-		const { email, pwd } = req.body
+  fastify.post('/login', {schema: loginSchema}, async (req:FastifyRequest<{Body: TAuthBody}>, rep: FastifyReply) => {
+    const { email, pwd } = req.body
 
-		try {
+    try {
       const values = await authService.loginWithPassword(email, pwd)
 
       rep.setCookie('refresh_token', values.refreshToken, {
@@ -44,15 +44,15 @@ const authRoute = async (fastify: FastifyInstance) => {
     catch(error) {
       handleError(rep, ERROR_MESSAGE.badRequest, error)
     }
-	})
+  })
 
-	fastify.delete('/logout', {schema: logoutSchema}, async (req: FastifyRequest, rep:FastifyReply) => {
-		const refresh_token = req.cookies.refresh_token
+  fastify.delete('/logout', {schema: logoutSchema}, async (req: FastifyRequest, rep:FastifyReply) => {
+    const refresh_token = req.cookies.refresh_token
     if(!refresh_token) {
       handleError(rep, ERROR_MESSAGE.unauthorized)
       return
     }
- 
+
     try {
       await authService.logout(refresh_token)
       rep.clearCookie('refresh_token', {path: '/'})
@@ -63,8 +63,8 @@ const authRoute = async (fastify: FastifyInstance) => {
     }    
   })
 
-	fastify.post('/refresh', {schema: refreshSchema}, async (req:FastifyRequest, rep: FastifyReply) => {
-		const refresh_token = req.cookies.refresh_token
+  fastify.post('/refresh', {schema: refreshSchema}, async (req:FastifyRequest, rep: FastifyReply) => {
+    const refresh_token = req.cookies.refresh_token
     if(!refresh_token) {
       handleError(rep, ERROR_MESSAGE.unauthorized)
       return

@@ -7,13 +7,13 @@ import { ERROR_MESSAGE } from '../../lib/constants'
 import likeService from '../../services/likeService'
 
 const likeRoute = async (fastify: FastifyInstance ) => {
-	fastify.route({
+  fastify.route({
     method: 'POST',
     schema: addLikeSchema,
     url: '/add/:articleId',
     preHandler: [verifySignIn],
     handler: async (req:FastifyRequest<{ Headers: TCommonHeaders, Params: TCommonParam}>, rep: FastifyReply) => {
-			const { articleId } = req.params
+      const { articleId } = req.params
       const userId = req.user!.id
 
       try {
@@ -26,13 +26,13 @@ const likeRoute = async (fastify: FastifyInstance ) => {
     }
   })
 
-	fastify.route({
+  fastify.route({
     method: 'GET',
     schema: readLikesSchema,
     url: '/',
     preHandler: [ verifySignIn],
     handler: async (req: FastifyRequest<{Headers: TCommonHeaders, Querystring: TCommonQuery}>, rep: FastifyReply) => {
-			const { pageNumber = 0 } = req.query
+      const { pageNumber = 0 } = req.query
       const userId = req.user!.id
 
       try {
@@ -45,13 +45,13 @@ const likeRoute = async (fastify: FastifyInstance ) => {
     }
   })
 
-	fastify.route({
+  fastify.route({
     method: 'POST',
     schema: cancelLikeSchema,
     url: '/cancel/:articleId',
     preHandler: [verifySignIn],
     handler: async (req:FastifyRequest<{Headers: TCommonHeaders, Params: TCommonParam}>, rep: FastifyReply) => {
-			const { articleId } = req.params
+      const { articleId } = req.params
       const userId = req.user!.id
 
       try {

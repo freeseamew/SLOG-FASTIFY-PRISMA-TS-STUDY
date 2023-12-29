@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-		name   : "slog-backend",    
+    name   : "slog-backend",    
     script: './dist/main.js',
     watch: './dist',
     instances: "2",

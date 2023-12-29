@@ -5,7 +5,7 @@ import { handleError } from '../lib/errorHelper'
 import { ERROR_MESSAGE } from '../lib/constants'
 
 function commentController() {
-	const createComment = async (req: FastifyRequest<{Headers: TCommonHeaders, Body: TCommonBody}>, rep: FastifyReply) => {
+  const createComment = async (req: FastifyRequest<{Headers: TCommonHeaders, Body: TCommonBody}>, rep: FastifyReply) => {
     const { articleId, content } = req.body
     const userId = req.user!.id
     const userEmail = req.user!.email
@@ -30,8 +30,8 @@ function commentController() {
       handleError(rep, ERROR_MESSAGE.badRequest, error)
     }
   }
-	
-	const deleteComment = async (req: FastifyRequest<{Headers: TCommonHeaders, Body: TCommentDeleteBody}>, rep: FastifyReply) => {
+
+  const deleteComment = async (req: FastifyRequest<{Headers: TCommonHeaders, Body: TCommentDeleteBody}>, rep: FastifyReply) => {
     const { articleId, commentId } = req.body
     const userId = req.user!.id
 

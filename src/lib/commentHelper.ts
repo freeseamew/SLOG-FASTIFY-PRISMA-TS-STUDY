@@ -16,7 +16,7 @@ const compareCommentUser = async (commentId: number, userId: number) => {
         userId: true
       }
     })
-  
+
     if(comment) {
       result = comment.userId === userId ? true : false 
     }
@@ -32,7 +32,7 @@ const verifyCommentUser = async (req: FastifyRequest<{Body: TCommentDeleteBody}>
   const { commentId } = req.body
   const userId = req.user!.id
 
-	const result = await compareCommentUser(commentId, userId)
+  const result = await compareCommentUser(commentId, userId)
   if(!result) handleError(rep, ERROR_MESSAGE.forbidden)
   return
 }

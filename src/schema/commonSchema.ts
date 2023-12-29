@@ -35,10 +35,10 @@ const commonPagenationSchema = Type.Object({
 })
 
 export {
-	commonHeadersSchema,
-	articleSchema,	
-	commonBodySchema,  
-	commonParamSchema,  
-	commonQuerySchema,
+  commonHeadersSchema,
+  articleSchema,	
+  commonBodySchema,  
+  commonParamSchema,  
+  commonQuerySchema,
   commonPagenationSchema,  
 }

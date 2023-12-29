@@ -1,5 +1,5 @@
 {
-	"compilerOptions": {
+  "compilerOptions": {
     "module": "ES2022",
     "esModuleInterop": true,
     "target": "ES2022",
@@ -13,7 +13,7 @@
     "useUnknownInCatchVariables": false,
     "inlineSourceMap": true
   },
-	"include": [
+  "include": [
     "src/**/*"
   ],
   "exclude": [

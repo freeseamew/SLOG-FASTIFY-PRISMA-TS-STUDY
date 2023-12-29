@@ -50,9 +50,9 @@ const refreshSchema = {
 }
 
 export {
-	authBodySchema,
-	registerSchema,
-	loginSchema, 
+  authBodySchema,
+  registerSchema,
+  loginSchema, 
   logoutSchema, 
   refreshSchema,
-}
+  }

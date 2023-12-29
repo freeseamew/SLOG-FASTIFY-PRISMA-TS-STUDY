@@ -3,14 +3,13 @@ import { ERROR_MESSAGE } from '../lib/constants'
 import { TArticle } from '../schema/types'
 
 function likeService() {
-
-	const addLike = async (articleId: number, userId: number) => {
+  const addLike = async (articleId: number, userId: number) => {
 
     const values = {
       userId: userId,
       articleId: articleId,
     }
-  
+
     try {
       const likeCheck = await db.like.count({
         where: {
@@ -18,12 +17,12 @@ function likeService() {
           articleId: articleId,
         }
       })
-  
+
       if(likeCheck === 0) {
         await db.like.create({
           data:values,
         })
-  
+
         await db.article.update({
           where: {
             id: articleId,
@@ -32,7 +31,7 @@ function likeService() {
             likeCount: {increment: 1}
           }
         })
-  
+
         return true
       }
       else {
@@ -44,8 +43,8 @@ function likeService() {
     }
   }
 
-	const cancelLike = async (articleId: number, userId: number) => {
-  
+  const cancelLike = async (articleId: number, userId: number) => {
+
     try {
       const likeCheck = await db.like.count({
         where: {
@@ -53,7 +52,7 @@ function likeService() {
           articleId: articleId,
         }
       })
-  
+
       if(likeCheck > 0) {
         await db.like.deleteMany({
           where: {
@@ -61,7 +60,7 @@ function likeService() {
             articleId: articleId,
           }
         })
-  
+
         await db.article.update({
           where: {
             id: articleId,
@@ -82,13 +81,13 @@ function likeService() {
     }
   }
 
-	const readLikes = async (pageNumber: number, userId: number) => {
-  
+  const readLikes = async (pageNumber: number, userId: number) => {
+
     const pageSize = 10
     let skip = 0
-  
+
     if(pageNumber > 1) skip = ((pageNumber -1) * pageSize)
-  
+
     try {
       const likeArticles = await db.like.findMany({
         where: {
@@ -117,16 +116,16 @@ function likeService() {
         skip: skip,
         take: pageSize,
       })
-  
+
       const totalLikeCount = await db.like.count({
         where: {
           userId: userId,
         },
       })
-  
+
       const totalPageCount = Math.ceil(totalLikeCount / pageSize)
       
-			let flattenArticles:TArticle[] = likeArticles.map(like => {
+      let flattenArticles:TArticle[] = likeArticles.map(like => {
         return {
           ...like.article,
           createdAt: like.article.createdAt.toString(),
@@ -135,7 +134,7 @@ function likeService() {
           likeMe: true,
         }
       })     
-  
+
       return {
         totalPageCount: totalPageCount, 
         articleList: flattenArticles
@@ -146,7 +145,7 @@ function likeService() {
     }
   }
 
-	return {
+  return {
     addLike,
     cancelLike,
     readLikes,

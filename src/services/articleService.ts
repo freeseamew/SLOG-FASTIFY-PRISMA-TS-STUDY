@@ -5,21 +5,21 @@ import { ERROR_MESSAGE, CATEGORY_TYPE } from '../lib/constants'
 import { verifyArticleUser, likeCompareArticles } from '../lib/articleHelper'
 
 function articleService() {
-	const createArticle = async (id:number, email:string, content:string) => {
+  const createArticle = async (id:number, email:string, content:string) => {
     
     try {
-  
+
       const values = {
         content: content,
         userId: id,
-				createdAt: getCurrentDate()
+        createdAt: getCurrentDate()
       }
 
-			const result = await db.article.create({
+      const result = await db.article.create({
         data: values
       })
-  
-			const returnValue:TArticle = {
+
+      const returnValue:TArticle = {
         ...result, 
         userEmail: email,
         likeMe: false,
@@ -33,11 +33,11 @@ function articleService() {
     }
   }
 
-	const updateArticle = async (articleId: number, content: string, userId: number, email: string) => {
-  
+  const updateArticle = async (articleId: number, content: string, userId: number, email: string) => {
+
     try {
       const checkVerifyUser = await verifyArticleUser(articleId, userId)
-  
+
       if(checkVerifyUser) {
         const result = await db.article.update({
           where: {
@@ -48,12 +48,12 @@ function articleService() {
           }
         })
     
-				const returnValue:TArticle = {
-	        ...result, 
-	        userEmail: email,
-	        likeMe: false,
-	        createdAt: result.createdAt.toString()
-	      }
+        const returnValue:TArticle = {
+          ...result, 
+          userEmail: email,
+          likeMe: false,
+          createdAt: result.createdAt.toString()
+        }
         
         return returnValue
       }
@@ -66,11 +66,11 @@ function articleService() {
     }
   }
 
-	const deleteArticle = async (articleId: number, userId: number ) => {
-  
+  const deleteArticle = async (articleId: number, userId: number ) => {
+
     try {
       const checkVerifyUser = await verifyArticleUser(articleId, userId)
-  
+
       if(checkVerifyUser) {
     
         const result = await db.article.delete({
@@ -90,7 +90,7 @@ function articleService() {
     }
   }  
 
-	const readArticleOne = async ( articleId: number ) => {
+  const readArticleOne = async ( articleId: number ) => {
     
     try {
       const articleOne = await db.article.findUnique({
@@ -106,9 +106,9 @@ function articleService() {
           }
         },        
       })
-  
-			let returnValue:TArticle | {}
-  
+
+      let returnValue:TArticle | {}
+
       if(articleOne) {
         returnValue = {
           ...articleOne, 
@@ -120,7 +120,7 @@ function articleService() {
       else {
         returnValue = {}
       }
-  
+
       return returnValue
     }
     catch(error) {
@@ -128,19 +128,19 @@ function articleService() {
     }
   }
 
-	const readArticlesList = async (pageNumber: number, mode: string, userId?: number) => {
-  
+  const readArticlesList = async (pageNumber: number, mode: string, userId?: number) => {
+
     const pageSize = 10
     let skip = 0
-  
+
     if(pageNumber > 1) skip = ((pageNumber - 1) * pageSize)
-  
+
     let _where = {}
 
     if(mode === CATEGORY_TYPE.MY ) {
       _where = {userId: userId}
     }    
-  
+
     try {
       const articles = await db.article.findMany({
         where : _where,
@@ -158,23 +158,23 @@ function articleService() {
         skip: skip,
         take: pageSize,      
       })
-  
+
       const totalArticleCount = await db.article.count({
         where: _where
       })  
-  
+
       let totalPageCount = Math.ceil(totalArticleCount / pageSize)
       
-			let flattenArticles:TArticle[] = articles.map(article => {
+      let flattenArticles:TArticle[] = articles.map(article => {
         return {
           ...article,
           userEmail: article.user.email,
-					likeMe: false,
+          likeMe: false,
           createdAt: article.createdAt.toString()
         }
       })
 
-			let returnArticles:TArticle[]
+      let returnArticles:TArticle[]
       
       if(userId) {
         returnArticles = await likeCompareArticles([...flattenArticles], userId)
@@ -187,7 +187,7 @@ function articleService() {
         totalPageCount: totalPageCount,
         articleList: returnArticles,
       }
-  
+
       return returnValue
     }
     catch(error) {
@@ -195,13 +195,13 @@ function articleService() {
     }
   }  
 
-	return {
-		createArticle,
-		updateArticle,
+  return {
+    createArticle,
+    updateArticle,
     deleteArticle,
-		readArticleOne,
+    readArticleOne,
     readArticlesList,    
-	}
+  }
 }
 
 export default articleService()
