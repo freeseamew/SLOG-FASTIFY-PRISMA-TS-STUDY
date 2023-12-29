@@ -1,4 +1,6 @@
 dist
+prisma/migrations/
+prisma/dev.db
 node_modules
 server.crt
 server.csr
