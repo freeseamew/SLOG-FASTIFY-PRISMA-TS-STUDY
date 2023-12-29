@@ -6,6 +6,13 @@ node_mode 다운로드
 npm i
 ```
 
+db생성
+
+```
+npx prisma migrate dev --name init
+```
+
+
 서버실행
 
 ```
