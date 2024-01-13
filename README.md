@@ -178,3 +178,15 @@ sudo snap install postman
 Frontend Project Link
 
 > https://github.com/freeseamew/SLOG-FRONTEND-SVELTE
+
+openssl 명령어
+```
+// 공개키 RSA 알고리즘을 통해서 2048bit CA개인키 생성
+openssl genrsa -out server.key 2048
+
+// CRS (인증신청서) 발급
+openssl req -new -key server.key -out server.csr
+
+인증서 만들기
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt   
+```
