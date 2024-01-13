@@ -7,7 +7,7 @@ import likeRoute from './like'
 const routes = async (fastify: FastifyInstance) => {
   await fastify.register(authRoute, {prefix: '/auth'} ) 
   await fastify.register(articleRoute, {prefix: '/articles'} ) 
-	await fastify.register(commentRoute, {prefix: '/comments'})
+  await fastify.register(commentRoute, {prefix: '/comments'})
   await fastify.register(likeRoute, {prefix: '/likes'})
 }
 
