@@ -11,7 +11,7 @@ const registerSchema = {
   body,
   response: {
     201: Type.Object({
-			status: Type.Number(),
+      status: Type.Number(),
       success: Type.Boolean(),
       message: Type.String(),
     }) 

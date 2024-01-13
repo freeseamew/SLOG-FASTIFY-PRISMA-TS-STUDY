@@ -8,7 +8,7 @@ const articleSchema = Type.Object({
   userId: Type.Number(),
   userEmail: Type.Optional(Type.String()),
   likeMe: Type.Optional(Type.Boolean()),
-	createdAt: Type.String(),
+  createdAt: Type.String(),
 })
 
 const commonHeadersSchema = Type.Object({

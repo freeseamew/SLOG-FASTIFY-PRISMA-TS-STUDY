@@ -48,9 +48,9 @@ const readArticlesSchema = {
 }
 
 export {
-	createArticleSchema,
-	updateArticleSchema,
+  createArticleSchema,
+  updateArticleSchema,
   deleteArticleSchema,
-	readArticleOneSchema,
-	readArticlesSchema,  
+  readArticleOneSchema,
+  readArticlesSchema,  
 }

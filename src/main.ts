@@ -14,7 +14,7 @@ import { swaggerConfig, swaggerUiConfig } from './config/swagger'
 
 const fastify = Fastify({
   logger: true,
-	// https: {
+  // https: {
   //   key: fs.readFileSync('./server.key'),
   //   cert: fs.readFileSync('./server.crt'),
   // }  
