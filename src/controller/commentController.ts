@@ -18,8 +18,8 @@ function commentController() {
       handleError(rep, ERROR_MESSAGE.badRequest, error)
     }
   }
-	
-	const readComment = async (req: FastifyRequest<{Headers: TCommonHeaders, Params: TCommonParam}>, rep: FastifyReply) => {
+
+  const readComment = async (req: FastifyRequest<{Headers: TCommonHeaders, Params: TCommonParam}>, rep: FastifyReply) => {
     const { articleId } = req.params
 
     try {
