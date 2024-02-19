@@ -33,7 +33,7 @@ package.json에서 build:live를 다음과 같이 변경해야 함.
 ```
 ...
   "scripts": {
-		"start:build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
+    "start:build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
     "build:live": "npx tsx src/main.ts",
     "start": "npm run build:live"
   },
