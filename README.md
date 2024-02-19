@@ -19,6 +19,25 @@ npx prisma migrate dev --name init
 npm run start
 ```
 
+
+> 윈도우에서 실행시킬 경우 다음 패키지를 설치하고,
+
+```
+npm i -D tsx
+```
+
+package.json에서 build:live를 다음과 같이 변경해야 함.
+
+```
+...
+  "scripts": {
+		"start:build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
+    "build:live": "npx tsx src/main.ts",
+    "start": "npm run build:live"
+  },
+
+```
+
 # 2. 우분투에서의 배포 설명
 
 ## 1. 유저 생성
