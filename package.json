@@ -7,7 +7,7 @@
   "scripts": {
     "start:build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
     "start:pm2":"pm2 start ./ecosystem.config.cjs",
-    "build:live": "nodemon --watch 'src/' --exec ts-node --esm src/main.ts --verbose ",
+    "build:live": "nodemon --watch 'src/' --exec node --loader ts-node/esm src/main.ts --verbose ",
     "start": "npm run build:live"
   },
   "author": "",
